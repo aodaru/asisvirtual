@@ -27,17 +27,16 @@
 
 ## 3. Despliegue de Supabase (ejecuta el usuario)
 
-- [ ] 3.1 El usuario despliega el stack oficial de Supabase self-hosted en
+- [x] 3.1 El usuario despliega el stack oficial de Supabase self-hosted en
       `10.0.5.16` usando `.env.example` como referencia.
-- [ ] 3.2 Verificar que Studio UI responde en `http://10.0.5.16:3000`.
-- [ ] 3.3 ⏸️ **Punto de espera**: el usuario avisa cuando el despliegue esté
-      listo para conexión.
+- [x] 3.2 Verificar que Studio UI responde en `http://10.0.5.16:30164`.
+- [x] 3.3 El usuario avisó; despliegue healthy, migraciones aplicadas.
 
 ## 4. Aplicación del schema
 
-- [ ] 4.1 Ejecutar migraciones 001 y 002 contra el PostgreSQL de
+- [x] 4.1 Ejecutar migraciones 001 y 002 contra el PostgreSQL de
       `10.0.5.16` (`psql` o desde Studio SQL Editor).
-- [ ] 4.2 Verificar en Studio que existen `asisvirtual.tasks`,
+- [x] 4.2 Verificar en Studio que existen `asisvirtual.tasks`,
       `asisvirtual.time_entries` y `asisvirtual.email_logs` con sus
       constraints.
 
