@@ -1,7 +1,7 @@
 # Plan — Fase 1: Infraestructura
 
 > Roadmap 1.1–1.5 adaptado a las decisiones del usuario: n8n ya existe
-> (`teapartyn8n.duckdns.org`); Supabase lo despliega el usuario en
+> (`n8n.adalgarcia.com`); Supabase lo despliega el usuario en
 > `10.0.5.16` con el stack oficial.
 
 ## 1. Artefactos de configuración

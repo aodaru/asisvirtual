@@ -14,7 +14,7 @@ Cómo saber que la implementación tuvo éxito y la rama puede mergearse.
 
 ### V2 — Supabase operativo (en `10.0.5.16`)
 
-- [ ] Studio UI responde en `http://10.0.5.16:3000` y permite login.
+- [ ] Studio UI responde en `http://10.0.5.16:30164` y permite login.
 - [ ] Los servicios del stack oficial están arriba
       (`docker compose ps` sin contenedores caídos/restarting).
 
@@ -36,7 +36,7 @@ Ejecutar contra el PostgreSQL de `10.0.5.16`:
 
 ### V4 — Conectividad n8n
 
-- [ ] Desde el n8n de `teapartyn8n.duckdns.org`, el nodo Postgres con la
+- [ ] Desde el n8n de `n8n.adalgarcia.com`, el nodo Postgres con la
       credencial nueva ejecuta sin error:
 
       ```sql

@@ -4,6 +4,14 @@ Cada entrada de agente se añade al inicio (más reciente primero).
 
 ---
 
+## 2026-07-27 12:00 — Implementer
+**Tarea:** 5.3 — Migración n8n a Cloudflare Tunnel
+**Acción:** Actualizadas referencias de `teapartyn8n.duckdns.org` → `n8n.adalgarcia.com` en specs (requirements.md, plan.md, validation.md) y en MCP URL de opencode.json. Corregido Studio URL en validation.md (3000→30164).
+**Archivos:** .config/opencode/opencode.json, specs/2026-07-27-fase-1-infraestructura/{requirements,plan,validation}.md
+**Resultado:** completado
+
+---
+
 ## 2026-07-27 11:00 — Implementer
 **Tarea:** 3.3–4.2 — Actualización .env.example y aplicación de migraciones
 **Acción:** Actualizado `.env.example` con puertos/URLs reales del despliegue (Kong 30164, PostgreSQL directo 5433, pooler 5432, Studio en 30164). Ejecutadas migraciones 001 y 002 vía `docker exec supabase-db psql -U supabase_admin` en 10.0.5.16. Schema `asisvirtual` creado con tablas `tasks`, `time_entries`, `email_logs` e índices, owner `supabase_admin`.

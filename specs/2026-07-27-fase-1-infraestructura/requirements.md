@@ -8,7 +8,7 @@
   **100% self-hosted**: Supabase + PostgreSQL 15+ como base de datos y n8n
   como orquestador.
 - **Decisión del usuario (2026-07-27):**
-  - n8n **ya está desplegado** y opera en `https://teapartyn8n.duckdns.org/`.
+  - n8n **ya está desplegado** y opera en `https://n8n.adalgarcia.com/`.
     No se despliega n8n desde este repo.
   - Supabase se desplegará en el host **`10.0.5.16`** con el **stack oficial
     completo** de Supabase self-hosted. **El usuario ejecuta el despliegue**
@@ -36,7 +36,7 @@
 
 ### Out of scope
 
-- Desplegar n8n (ya existe en `teapartyn8n.duckdns.org`).
+- Desplegar n8n (ya existe en `n8n.adalgarcia.com`).
 - Ejecutar el despliegue de Supabase (lo realiza el usuario).
 - Workflows de negocio de n8n (Fases 2+), bot de Telegram, escaneo de
   correo, LLM, time tracking, reportes.
