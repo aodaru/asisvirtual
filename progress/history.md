@@ -4,6 +4,15 @@ Cada entrada de agente se añade al inicio (más reciente primero).
 
 ---
 
+## 2026-07-30 — Implementer
+**Tarea:** Cierre Fase 1 — Infraestructura
+**Acción:** Ejecutado workflow de prueba exitosamente (execution 4793, status: success, `total_tasks: 0`). Completado checklist V1–V5 en validation.md. Todos los criterios verificados.
+**Archivos:** specs/2026-07-27-fase-1-infraestructura/{plan,validation}.md, progress/history.md
+**Resultado:** completado
+**Notas:** Fase 1 cerrada. Pendiente merge de feature/fase-1-infraestructura a master.
+
+---
+
 ## 2026-07-27 12:00 — Implementer
 **Tarea:** 5.3 — Migración n8n a Cloudflare Tunnel
 **Acción:** Actualizadas referencias de `teapartyn8n.duckdns.org` → `n8n.adalgarcia.com` en specs (requirements.md, plan.md, validation.md) y en MCP URL de opencode.json. Corregido Studio URL en validation.md (3000→30164).

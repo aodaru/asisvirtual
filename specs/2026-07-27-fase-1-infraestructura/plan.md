@@ -42,9 +42,9 @@
 
 ## 5. Conexión n8n → PostgreSQL
 
-- [ ] 5.1 Crear credencial PostgreSQL en el n8n existente: host `10.0.5.16`,
+- [x] 5.1 Crear credencial PostgreSQL en el n8n existente: host `10.0.5.16`,
       puerto `5432`, database y rol configurados en el despliegue.
-- [ ] 5.2 Workflow de prueba en n8n:
+- [x] 5.2 Workflow de prueba en n8n:
       `SET search_path TO asisvirtual; SELECT count(*) FROM tasks;`
       debe ejecutar sin error.
 
