@@ -300,12 +300,36 @@ El sistema envía mensajes proactivos al usuario:
 Host: localhost (o nombre del contenedor)
 Port: 5432
 Database: supabase (o el nombre de la base)
-User: postgres (o el rol configurado)
+User: postgres
 Password: <configurada en docker-compose>
 
 Query inicial recomendada para cada workflow:
   SET search_path TO asisvirtual;
 ```
+
+**Nota:** El usuario `postgres` tiene permisos completos (CREATE, SELECT, INSERT, UPDATE, DELETE) en el schema `asisvirtual`. Owner del schema: `supabase_admin` (migración 003).
+
+### Conexión n8n → Supabase (PostgREST API)
+```
+Host: http://10.0.5.16:30164
+Schema: asisvirtual (configurado como default en PGRST_DB_SCHEMAS)
+```
+- **Nodo Supabase nativo**: Host `http://10.0.5.16:30164` + SERVICE_ROLE_KEY
+- **Schema custom**: `useCustomSchema: true, schema: "asisvirtual"` en cada nodo Supabase
+- PostgREST busca en `asisvirtual` por defecto (`PGRST_DB_SCHEMAS=asisvirtual,public`)
+- Las keys JWT (ANON_KEY, SERVICE_ROLE_KEY) deben estar firmadas con el JWT_SECRET del servidor (no el placeholder de demo)
+
+### Roles de base de datos y permisos
+
+| Rol | Permisos en `asisvirtual` | Uso |
+|---|---|---|
+| `supabase_admin` | Owner del schema | Dueño original, creador de tablas |
+| `postgres` | CREATE, SELECT, INSERT, UPDATE, DELETE | Conexión directa a PostgreSQL |
+| `service_role` | USAGE, SELECT, INSERT, UPDATE, DELETE, ALL SEQUENCES | PostgREST con SERVICE_ROLE_KEY (bypasses RLS) |
+| `anon` | USAGE, SELECT | PostgREST con ANON_KEY (lectura pública) |
+| `authenticator` | USAGE, SELECT | Rol de conexión de PostgREST (hace SET ROLE) |
+
+**Nota sobre Kong**: `volumes/api/kong.yml` incluye `Content-Profile: asisvirtual` en el request-transformer de la ruta `rest-v1` (línea 173). Este cambio persiste en el host pero se perdería si se sobreescribe el archivo desde un template oficial de Supabase.
 
 ### Autenticación de Correos
 - **Gmail**: OAuth2 con Google Cloud Console (credenciales de aplicación de escritorio)

@@ -33,6 +33,16 @@
    verificación en Studio.
 6. Credencial PostgreSQL en el n8n existente apuntando a `10.0.5.16` y
    workflow de prueba (`SET search_path TO asisvirtual; SELECT ...`).
+7. Migración SQL `003`: permisos del schema `asisvirtual` para el usuario
+   `postgres` (migración de corrección post-despliegue).
+8. Permisos de PostgREST: GRANTs a `anon`, `service_role` y `authenticator`
+   en schema `asisvirtual` para que la API REST funcione.
+9. JWT keys (ANON_KEY, SERVICE_ROLE_KEY) firmadas con el JWT_SECRET real
+   del servidor (no el placeholder de demo).
+10. PostgREST schema: `PGRST_DB_SCHEMAS=asisvirtual,public` (asisvirtual
+    primero = schema por defecto).
+11. Kong: `Content-Profile: asisvirtual` en `volumes/api/kong.yml` para
+    soporte multi-schema.
 
 ### Out of scope
 
@@ -53,6 +63,10 @@
 | D4 | Schema `asisvirtual` separado en PostgreSQL | Principio multi-proyecto de la misión (extensibilidad) |
 | D5 | Migraciones SQL versionadas en el repo (`db/migrations/`) | Reproducibilidad; el despliegue lo hace el usuario pero el schema es canónico |
 | D6 | PostgreSQL accesible desde la red del n8n existente (puerto 5432 en `10.0.5.16`) | Requisito de conectividad para todas las fases siguientes |
+| D7 | `PGRST_DB_SCHEMAS=asisvirtual,public` (asisvirtual primero) | PostgREST busca en `asisvirtual` por defecto; evita error PGRST205 |
+| D8 | JWT keys regeneradas con secret real del servidor | Las keys de demo no funcionan con el JWT_SECRET del despliegue real |
+| D9 | `Content-Profile: asisvirtual` en Kong request-transformer | Prevención para soporte multi-schema (bug conocido: no funciona para GET) |
+| D10 | Permisos explícitos para `anon`, `service_role`, `authenticator` | PostgREST necesita estos GRANTs para acceder al schema `asisvirtual` |
 
 ## Referencias
 
