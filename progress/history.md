@@ -4,6 +4,15 @@ Cada entrada de agente se añade al inicio (más reciente primero).
 
 ---
 
+## 2026-07-30 19:00 — Implementer
+**Tarea:** Fase 4 — AI Analysis (Pipeline integrado)
+**Acción:** Agregado pipeline de IA a ambos workflows (Gmail nhsofbe2GPjdojoQ, Outlook IDo0ZxgF4a5UURiu). Nuevos nodos: Prepare LLM Prompt (Code node), LLM Analysis (HTTP Request con credencial OpenCode Go), Parse LLM Response (Code node), Create Task in Supabase, Notify Telegram. Pipeline completo: pre-filtro → LLM → tarea en DB → notificación Telegram. Credencial OpenCode Go (G6JD5dW43Y5RXkxi) asignada a nodos LLM Analysis.
+**Archivos:** specs/2026-07-30-ai-analysis/plan.md, progress/history.md
+**Resultado:** completado
+**Notas:** Fase 4 implementada. Pendiente: Task Group 6 (validación y pruebas), probar con correos reales.
+
+---
+
 ## 2026-07-30 18:00 — Implementer
 **Tarea:** Fase 3 — Email Scanner (Activación y pruebas)
 **Acción:** Publicados y activados ambos workflows. Prueba manual Gmail exitosa (execution 4893, 14s). Outlook falló inicialmente con client secret expirado (AADSTS7000222). Usuario re-generó secret en Azure Portal y actualizó credencial en n8n. Segunda prueba Outlook exitosa (execution 4897, 7s). Ambos workflows activos y funcionando.
