@@ -2,6 +2,8 @@
 .env
 .env.local
 .env.*.local
+supabase-backup/.env.server
+specs/2026-07-30-telegram-bot/PROMPT.md
 
 # OS
 .DS_Store

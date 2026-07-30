@@ -11,7 +11,7 @@
       puertos de Studio/API, etc.) con valores placeholder.
 - [x] 1.2 Asegurar que `.env` está en `.gitignore`.
 - [x] 1.3 Documentar en el `.env.example` los requisitos de red: PostgreSQL
-      (5432) accesible desde el host de n8n; Studio en `http://10.0.5.16:3000`.
+      (5432) accesible desde el host de n8n; Studio en `http://10.0.5.16:30164`.
 
 ## 2. Migraciones de base de datos
 
@@ -53,3 +53,26 @@
 - [ ] 6.1 Registrar la entrada en `progress/history.md` (formato estándar).
 - [ ] 6.2 Checklist de `validation.md` completo → merge de
       `feature/fase-1-infraestructura` a `master`.
+
+## 7. Fix PostgREST API y permisos (2026-07-30)
+
+- [x] 7.1 **Migración 003** (`003_fix_schema_permissions.sql`): otorgar
+      permisos CREATE, INSERT, UPDATE, DELETE al usuario `postgres` en el
+      schema `asisvirtual` (owner sigue siendo `supabase_admin`).
+- [x] 7.2 **Permisos PostgREST**: GRANTs a `anon` (USAGE, SELECT),
+      `service_role` (ALL), `authenticator` (USAGE, SELECT) en schema
+      `asisvirtual`. Default privileges para futuras tablas/secuencias.
+- [x] 7.3 **JWT keys**: regenerar ANON_KEY y SERVICE_ROLE_KEY firmadas con
+      el JWT_SECRET real del servidor (no el placeholder de demo). Script
+      de regeneración: `python3 -c "..."` con HMAC-SHA256.
+- [x] 7.4 **PostgREST schema**: cambiar `PGRST_DB_SCHEMAS` de
+      `public,asisvirtual` a `asisvirtual,public` para que PostgREST busque
+      en `asisvirtual` por defecto. Actualizar `PGRST_DB_EXTRA_SEARCH_PATH`
+      a `asisvirtual,public`.
+- [x] 7.5 **Kong**: recrear contenedor con `docker compose up -d
+      --force-recreate kong` para aplicar nuevas keys JWT. Modificar
+      `volumes/api/kong.yml` línea 173: agregar `Content-Profile:
+      asisvirtual` al request-transformer de la ruta `rest-v1` (prevención
+      futura para multi-schema). **Nota**: este cambio persiste en el host
+      pero se perdería si se sobreescribe `kong.yml` desde un template
+      oficial de Supabase.

@@ -54,8 +54,23 @@ Ejecutar contra el PostgreSQL de `10.0.5.16`:
       usuario + artefactos del repo; 1.3 y 1.4 vía migraciones; 1.5 vía
       credencial y workflow de prueba en el n8n existente.
 
+### V6 — PostgREST API funcional
+
+- [x] JWT keys (ANON_KEY, SERVICE_ROLE_KEY) firmadas con el JWT_SECRET real
+      del servidor (verificar que `docker inspect supabase-kong` muestre
+      las keys correctas en `SUPABASE_ANON_KEY` / `SUPABASE_SERVICE_KEY`).
+- [x] `PGRST_DB_SCHEMAS=asisvirtual,public` en el `.env` del servidor
+      (asisvirtual primero = schema por defecto de PostgREST).
+- [x] Kong sirve requests REST: `curl -s http://10.0.5.16:30164/rest/v1/tasks`
+      con SERVICE_ROLE_KEY retorna `[]` (no error 401/404).
+- [x] Permisos verificados: `anon`, `service_role` y `authenticator` tienen
+      GRANTs en schema `asisvirtual` (SELECT para anon, ALL para
+      service_role, USAGE para authenticator).
+- [x] `volumes/api/kong.yml` incluye `Content-Profile: asisvirtual` en el
+      request-transformer de la ruta `rest-v1` (línea 173).
+
 ## Criterio de merge
 
-Todos los checks V1–V5 marcados → merge de
-`feature/fase-1-infraestructura` a `master`. Si V3/V4 fallan, la rama no se
+Todos los checks V1–V6 marcados → merge de
+`feature/fase-1-infraestructura` a `master`. Si V3/V4/V6 fallan, la rama no se
 mergea y se documenta el bloqueo en `progress/history.md`.

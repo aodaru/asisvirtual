@@ -1,0 +1,1 @@
+You are connected to database "supabase" as user "supabase_admin" via socket in "/run/postgresql" at port "5432".
